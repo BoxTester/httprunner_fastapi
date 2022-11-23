@@ -4,8 +4,6 @@ from httprunner.utils import init_logger
 from config import Settings
 
 from routers import (
-    run_hrun,
-    run_test_start,
     run_pytest,
     run_har2case,
     run_online_debug
@@ -15,8 +13,6 @@ from routers import (
 def create_app():
     init_logger(Settings().LOG_LEVEL)
     app = FastAPI()
-    app.include_router(run_hrun.router)
-    app.include_router(run_test_start.router)
     app.include_router(run_pytest.router)
     app.include_router(run_har2case.router)
     app.include_router(run_online_debug.router)
