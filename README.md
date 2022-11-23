@@ -8,8 +8,8 @@ FastAPI
 
 #### 工程目录
 
+- hrun_proj：httprunner工程
 - logs：日志
-- project_demo：httprunner工程
 - routers：路由
 - utils：工具类
   -httpruner_modify：httprunner二次开发
@@ -28,7 +28,7 @@ FastAPI
 - run_har2case——>"har\\requests.har"
 - run_pytest——>"testcases\\requests.json"
 
-#### 路由介绍
+#### 路由
 1. run_har2case
     将har文件转化为httprunner用例
 2. run_pytest
