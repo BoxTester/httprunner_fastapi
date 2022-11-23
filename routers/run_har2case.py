@@ -27,8 +27,3 @@ async def run_har2case(har_path: str):
         resp["message"] = f"Unexpected Error:{traceback.format_exc()}"  
     logger.info("run_har2case.return:"+resp["message"])    
     return resp
-    
-
-if __name__ == "__main__":
-    har_path = 'C:\\hrp4demo\\har\\test.har'
-    print(HarParser(har_path)._make_testcase("V2"))

@@ -29,9 +29,7 @@ FastAPI
 #### 路由介绍
 1. run_har2case
     将har文件转化为httprunner用例
-2. run_hrun(V2)
-    执行用例，使用json对象的方式执行用例，得到执行结果
-3. run_pytest(推荐)
+2. run_pytest
     执行用例，使用pytest的方式执行用例，得到执行结果
-4. run_online_debug
+3. run_online_debug
     在线调试，使用json用例在线调试，得到接口响应结果
