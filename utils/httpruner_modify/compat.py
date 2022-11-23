@@ -327,12 +327,12 @@ def session_fixture(request):
             )
             summary["stat"]["teststeps"]["failures"] += 1
             
-        #---------------Add By boxgitee-------------#
+        #---------------Add By BoxTester-------------#
         if not testcase_summary.step_results:
             summary["success"] = False
             summary["stat"]["testcases"]["fail"] += 1
             summary["stat"]["testcases"]["success"] = 0
-        #---------------Add By boxgitee-------------#
+        #---------------Add By BoxTester-------------#
 
         testcase_summary_json = testcase_summary.dict()
         testcase_summary_json["records"] = testcase_summary_json.pop("step_results")

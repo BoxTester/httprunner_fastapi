@@ -238,12 +238,12 @@ def get_mapping_variable(
     try:
         return variables_mapping[variable_name]
     except KeyError:
-        #---------------Add By boxgitee-------------#
+        #---------------Add By BoxTester-------------#
         error_mag = f"httprunner.exceptions.VariableNotFound: {variable_name} not found in {variables_mapping}"
         error_path = os.path.join("logs","httprunner.exceptions.log")
         with open(error_path,"w+") as error_file:
             error_file.write(error_mag)
-        #---------------Add By boxgitee-------------#
+        #---------------Add By BoxTester-------------#
         raise exceptions.VariableNotFound(
             f"{variable_name} not found in {variables_mapping}"
         )
@@ -293,12 +293,12 @@ def get_mapping_function(
         return getattr(builtins, function_name)
     except AttributeError:
         pass
-    #---------------Add By boxgitee-------------#
+    #---------------Add By BoxTester-------------#
     error_mag = f"httprunner.exceptions.FunctionNotFound: {function_name} is not found."
     error_path = os.path.join("logs","httprunner.exceptions.log")
     with open(error_path,"w+") as error_file:
         error_file.write(error_mag)
-    #---------------Add By boxgitee-------------#
+    #---------------Add By BoxTester-------------#
     raise exceptions.FunctionNotFound(f"{function_name} is not found.")
 
 

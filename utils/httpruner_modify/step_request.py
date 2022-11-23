@@ -128,7 +128,7 @@ def run_step_request(runner: HttpRunner, step: TStep) -> StepResult:
     for k, v in parsed_request_dict.items():
         request_print += f"{k}: {pretty_format(v)}\n"
 
-    # logger.debug(request_print) # Remove By boxgitee
+    # logger.debug(request_print) # Remove By BoxTester
     if ALLURE is not None:
         ALLURE.attach(
             request_print,
@@ -148,7 +148,7 @@ def run_step_request(runner: HttpRunner, step: TStep) -> StepResult:
         resp_body = resp.content
 
     response_print += f"body: {pretty_format(resp_body)}\n"
-    # logger.debug(response_print) # Remove By boxgitee
+    # logger.debug(response_print) # Remove By BoxTester
     if ALLURE is not None:
         ALLURE.attach(
             response_print,
@@ -176,8 +176,8 @@ def run_step_request(runner: HttpRunner, step: TStep) -> StepResult:
         resp_obj.validate(validators, variables_mapping)
         step_result.success = True
     except ValidationFailure:
-        # raise # Remove By boxgitee
-        step_result.success = False # Add By boxgitee
+        # raise # Remove By BoxTester
+        step_result.success = False # Add By BoxTester
     finally:
         session_data = runner.session.data
         session_data.success = step_result.success

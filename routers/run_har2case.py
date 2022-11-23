@@ -25,5 +25,5 @@ async def run_har2case(har_path: str):
     except:
         resp["code"] = 500
         resp["message"] = f"Unexpected Error:{traceback.format_exc()}"  
-    logger.info("run_har2case.return:"+resp["message"])    
+    logger.debug("run_har2case.return:"+resp["message"])    
     return resp

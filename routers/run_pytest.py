@@ -15,15 +15,14 @@ def settings():
 router = APIRouter()
 
 @router.post("/run_pytest", tags=["httprunner"])
-async def run_pytest(testcase_info: dict, config: Settings = Depends(settings)):
-    logger.info(f"run_pytest.params: {testcase_info}")
+async def run_pytest(case_path: str, config: Settings = Depends(settings)):
+    logger.debug(f"run_pytest.params: {case_path}")
     resp = {
         "code": 200,
         "message": "success",
         "results": {}
     }
     try:
-        case_path = testcase_info.get("case_path")
         testcase_json_path = os.path.join(config.ROOT_PATH,case_path)
         if os.path.exists(testcase_json_path):
             excute_args = config.EXCUTE_ARGS
@@ -42,7 +41,7 @@ async def run_pytest(testcase_info: dict, config: Settings = Depends(settings)):
                     message = "httprunner.exceptions: Unexpected Error"
                 resp["code"] = 300
                 resp["message"] = message
-            result = {"summary":summary,"caseID":testcase_info.get("caseID"),"case_path":case_path}
+            result = {"summary":summary,"case_path":case_path}
             resp["results"] = result
         else:
             resp["code"] = 400
@@ -50,5 +49,5 @@ async def run_pytest(testcase_info: dict, config: Settings = Depends(settings)):
     except:
         resp["code"] = 500
         resp["message"] = f"Unexpected Error:{traceback.format_exc()}"
-    logger.info("run_pytest.return: "+resp["message"])
+    logger.debug("run_pytest.return: "+resp["message"])
     return resp

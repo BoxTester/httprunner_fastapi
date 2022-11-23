@@ -118,12 +118,12 @@ def get_os_environ(variable_name):
     try:
         return os.environ[variable_name]
     except KeyError:
-        #---------------Add By boxgitee-------------#
+        #---------------Add By BoxTester-------------#
         error_mag = f"httprunner.exceptions.EnvNotFound: {variable_name}"
         error_path = os.path.join("logs","httprunner.exceptions.log")
         with open(error_path,"w+") as error_file:
             error_file.write(error_mag)
-        #---------------Add By boxgitee-------------#
+        #---------------Add By BoxTester-------------#
         raise exceptions.EnvNotFound(variable_name)
 
 
@@ -341,7 +341,7 @@ def init_logger(level: str):
     logger.remove()
     logger.add(sys.stdout, format=LOGGER_FORMAT, level=level)
 
-    #---------------Add By boxgitee-------------#
+    #---------------Add By BoxTester-------------#
     LOGGER_FORMAT_FOR_FASTAPI = ("<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> <level>{level}</level> [{name}:{line}] - <level>{message}</level>")
     logger.add(
         os.path.join("logs","httprunner.{time:YYYY-MM-DD}.log"),
@@ -352,4 +352,4 @@ def init_logger(level: str):
         rotation="00:00", 
         retention=5
     )
-    #---------------Add By boxgitee-------------#
+    #---------------Add By BoxTester-------------#

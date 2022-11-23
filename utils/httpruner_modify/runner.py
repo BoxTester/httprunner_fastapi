@@ -222,17 +222,17 @@ class SessionRunner(object):
 
         # logger.info(
         #     f"Start to run testcase: {self.__config.name}, TestCase ID: {self.case_id}"
-        # ) # Remove By boxgitee
-        logger.info(f"Start to run testcase: {self.__config.name}") # Add By boxgitee
+        # ) # Remove By BoxTester
+        logger.info(f"Start to run testcase: {self.__config.name}") # Add By BoxTester
 
-        # logger.add(self.__log_path, format=LOGGER_FORMAT, level="DEBUG") # Remove By boxgitee
+        # logger.add(self.__log_path, format=LOGGER_FORMAT, level="DEBUG") # Remove By BoxTester
         self.__start_at = time.time()
         try:
             # run step in sequential order
             for step in self.teststeps:
                 self.__run_step(step)
         finally:
-            # logger.info(f"generate testcase log: {self.__log_path}") # Remove By boxgitee
+            # logger.info(f"generate testcase log: {self.__log_path}") # Remove By BoxTester
             if ALLURE is not None:
                 ALLURE.attach.file(
                     self.__log_path,
@@ -243,35 +243,6 @@ class SessionRunner(object):
         self.__duration = time.time() - self.__start_at
 
         return self
-
-    #---------------Add By boxgitee-------------#
-    def init_hrun(self,testcase_obj:TestCase):
-        self.__config = testcase_obj.config
-        self.__project_meta = load_project_meta(self.__config.path)
-        self.parser = self.parser or Parser(self.__project_meta.functions)
-        self.__start_at = 0
-        self.__duration = 0
-        self.case_id = str(uuid.uuid4())
-        self.root_dir = self.__project_meta.RootDir
-        self.__log_path = os.path.join(self.root_dir, "logs", f"{self.case_id}.run.log")
-        self.__step_results = []
-        self.session = self.session or HttpSession()
-        self.__session_variables = {} 
-
-    def parse_config_variables(self,param:dict):
-        self.__parse_config(param)
-
-    def result_dispose(self,step_result:StepResult):
-        self.__session_variables.update(step_result.export_vars)
-        self.__step_results.append(step_result)
-
-    def start_time(self):
-        self.__start_at = time.time() 
-
-    def total_time(self):
-        self.__duration = time.time() - self.__start_at
-    #---------------Add By boxgitee-------------#
-
 
 class HttpRunner(SessionRunner):
     # split SessionRunner to keep consistent with golang version

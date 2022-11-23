@@ -247,7 +247,7 @@ class ResponseObjectBase(object):
                 logger.error(validate_msg)
                 failures.append(validate_msg)
 
-                validator_dict["message"] = message # Add By boxgitee
+                validator_dict["message"] = message # Add By BoxTester
 
             self.validation_results["validate_extractor"].append(validator_dict)
 
