@@ -76,10 +76,12 @@ class HttpRequest(requests.Session):
 
         req_resp = {"request":request_data,"response":response_data}
         
-        request_info = f"\nrequest info:\n> {method} {url}\n> kwargs: {kwargs}"
+        request_info = f"\nrequest info:\n> {method} {url}\n> kwargs: {json.dumps(kwargs, indent=4, ensure_ascii=False)}"
         for r_type in req_resp:
             msg = f"\n================== {r_type} details ==================\n"
             for key, value in req_resp[r_type].items():
+                if isinstance(value, dict) or isinstance(value, list):
+                    value = json.dumps(value, indent=4, ensure_ascii=False)
                 msg += f"{key:<8} : {value}\n"
             request_info += msg
         logger.debug(request_info)
@@ -89,9 +91,9 @@ class HttpRequest(requests.Session):
 if __name__ == '__main__':
     method = "GET"
     headers = {"user-agent": "Edg/106.0.1370.47",'Content-Type':'application/json;charset=UTF-8'}
-    url = 'htt://api.wrdan.com/shorturl'
+    url = 'https://api.wrdan.com/shorturl'
     data = ''
-    json = ''
+    jsons = ''
     params = {"url": "https://api.wrdan.com","api": "mrwso"}
-    print(HttpRequest().requests(method=method,url=url,headers=headers,params=params))
+    print(HttpRequest().request(method=method,url=url,headers=headers,params=params))
 
