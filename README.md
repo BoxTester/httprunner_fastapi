@@ -21,17 +21,17 @@ FastAPI
 2. config配置包含以下配置：
 - ROOT_PATH：httprunner工程根目录
 - LOG_LEVEL：日志级别    
-- EXCUTE_ARGS：pytest执行参数
+- HRUN_EXCUTE_ARGS：执行命令参数
 
 3. 启动命令：uvicorn main:app
 - 打开http://127.0.0.1:8000/docs#,可在fastapi提供的Swagger页面调试对应路由,eg.:
 - run_har2case——>"har\\requests.har"
-- run_pytest——>"testcases\\requests.json"
+- run_subprocess>"testcases\\requests.json"
 
 #### 路由
 1. run_har2case
-    将har文件转化为httprunner用例
-2. run_pytest
-    执行用例,使用pytest的方式执行httprunner用例,得到执行结果
-3. run_online_debug
+    将har文件转化为用例json体，此json体可作为run_debug的入参调用
+2. run_subprocess
+    执行用例,传入用例路径作为入参,得到执行结果
+3. run_debug
     在线调试,用于接口调试,使用run_har2case转换后的json内容在线执行,得到接口响应结果

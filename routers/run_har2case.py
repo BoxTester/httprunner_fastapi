@@ -4,8 +4,7 @@ from loguru import logger
 
 from har2case.core import HarParser
 
-import sys,functools
-sys.path.append('..')
+import functools
 from config import Settings
 
 @functools.lru_cache()
@@ -26,8 +25,7 @@ async def run_har2case(har_path: str, config: Settings = Depends(settings)):
         har_path = os.path.join(config.ROOT_PATH,har_path)
         if os.path.exists(har_path):
             case_info = HarParser(har_path)._make_testcase("V2")
-            result = {"case_info":case_info,"har_path":har_path}
-            resp["results"] = result
+            resp["results"] = {"case_info":case_info,"har_path":har_path}
         else:
             resp["code"] = 400
             resp["message"] = f"Path Not Exist:{har_path}"
