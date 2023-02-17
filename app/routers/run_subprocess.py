@@ -12,15 +12,14 @@ def settings():
 router = APIRouter()
 
 @router.post("/run_subprocess", tags=["httprunner"])
-async def run_subprocess(testcase_info: dict, config: Settings = Depends(settings)):
-    logger.info(f"run_subprocess.params: {testcase_info}")
+async def run_subprocess(case_path: str, config: Settings = Depends(settings)):
+    logger.info(f"run_subprocess.params: {case_path}")
     resp = {
         "code": 200,
         "message": "success",
         "results": {}
     }
     try:
-        case_path = testcase_info.get("case_path")
         testcase_json_path = os.path.join(config.ROOT_PATH,case_path)
         if os.path.exists(testcase_json_path):
             excute_args = []
@@ -31,7 +30,7 @@ async def run_subprocess(testcase_info: dict, config: Settings = Depends(setting
             if os.path.exists(summary_path):
                 with open(summary_path,"r") as summary_file:
                     summary = json.load(summary_file)
-                resp["results"] = {"summary":summary,"caseID":testcase_info.get("caseID"),"case_path":case_path}
+                resp["results"] = {"summary":summary,"case_path":testcase_json_path}
                 os.remove(summary_path)
                 if CompletedProcess.returncode != 0:
                     error_path = os.path.join("logs","httprunner.exceptions.log")
